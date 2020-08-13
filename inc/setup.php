@@ -8,59 +8,11 @@ if (!function_exists('wptheme_setup')) :
      * as indicating support for post thumbnails.
      */
 
-    /**
-     * Add Extra Code to Primary Menu
-     * @param string $menu
-     * @param object $args
-     * @return string modified menu
-     * @link http://www.billerickson.net/customizing-wordpress-menus/
-     *
-     * @author Bill Erickson
-     */
-    function be_menu_extras($menu, $args)
-    {
-        if (!function_exists('is_plugin_active'))
-            require_once(ABSPATH . '/wp-admin/includes/plugin.php');
-
-        if (class_exists('woocommerce') && is_plugin_active('woocommerce/woocommerce.php')) {
 
 
-            $extras = '<div class="row mx-md-n5">
-                        <div class="col px-md-5">
-                            <div class="p-1 border bg-light">
-                            <a  href="' . esc_url(wc_get_page_permalink('cart')) . ' " >
-                                <i class="fa fa-shopping-cart"></i>
-                                </a>
-                            </div>
-						</div>
-                        <div class="col px-md-5">
-                            <div class="p-1 border bg-light">
-                            <a  href="' . esc_url(wc_get_page_permalink('shop')) . '" >
-                                <i class="fa fa-shopping-bag"></i>
-                                </a>
-                                </div>
-						 </div>
-						 <div class="col px-md-5">
-                            <div class="p-1 border bg-light">
-                            <a  href="' . esc_url(wc_get_page_permalink('myaccount')) . '" >
-                                 <i class="fa fa-user"></i>
-                                </a>
-                                </div>
-                                
-						 </div>
-						 <div class="col px-md-5">
-                            <div class="p-1 border bg-light">
-                            <a  href="' . esc_url(wc_get_checkout_url()) . '" >
-                               <i class="fa fa-check"></i>
-                                </a>
-                                </div>
-                                </div>
-                        </div>';
-            return $menu . $extras;
-        }
-    }
 
-    add_filter('wp_nav_menu', 'be_menu_extras', 10, 2);
+
+
     function wptheme_setup()
     {
         /*
@@ -97,6 +49,13 @@ if (!function_exists('wptheme_setup')) :
         register_nav_menus(array(
             'primary' => esc_html__('primary', 'wptheme'),
         ));
+
+
+
+
+
+
+
 
         /*
          * Switch default core markup for search form, comment form, and comments
@@ -151,4 +110,57 @@ function wptheme_content_width()
 }
 
 add_action('after_setup_theme', 'wptheme_content_width', 0);
+
+
+/**
+ * Dodaj ikonki WC
+
+ *
+ *
+ * */
+if ( has_nav_menu( 'primary' )){
+    function be_menu_extras($menu, $args) {
+        if (!function_exists('is_plugin_active'))
+            require_once(ABSPATH . '/wp-admin/includes/plugin.php');
+
+        if (class_exists('woocommerce') && is_plugin_active('woocommerce/woocommerce.php')) {
+
+
+            $extras = '<div class="row mx-md-n5">
+                        <div class="col px-md-5">
+                            <div class="p-1 border bg-light">
+                            <a  href="' . esc_url(wc_get_page_permalink('cart')) . ' " >
+                                <i class="fa fa-shopping-cart"></i>
+                                </a>
+                            </div>
+						</div>
+                        <div class="col px-md-5">
+                            <div class="p-1 border bg-light">
+                            <a  href="' . esc_url(wc_get_page_permalink('shop')) . '" >
+                                <i class="fa fa-shopping-bag"></i>
+                                </a>
+                                </div>
+						 </div>
+						 <div class="col px-md-5">
+                            <div class="p-1 border bg-light">
+                            <a  href="' . esc_url(wc_get_page_permalink('myaccount')) . '" >
+                                 <i class="fa fa-user"></i>
+                                </a>
+                                </div>
+                                
+						 </div>
+						 <div class="col px-md-5">
+                            <div class="p-1 border bg-light">
+                            <a  href="' . esc_url(wc_get_checkout_url()) . '" >
+                               <i class="fa fa-check"></i>
+                                </a>
+                                </div>
+                                </div>
+                        </div>';
+            return $menu . $extras;
+        }
+    }
+
+    add_filter('wp_nav_menu', 'be_menu_extras', 10, 2);
+}
 ?>
