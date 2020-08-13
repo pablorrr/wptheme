@@ -10,7 +10,7 @@ The theme includes the following template files:
 archive.php- for archive pages
 index.php
 page.php - for static pages
-front-page.php - for first front page with optional segments
+
 header.php
 header-blog.php - for blog header
 header-arch.php - for archive header
