@@ -50,13 +50,6 @@ if (!function_exists('wptheme_setup')) :
             'primary' => esc_html__('primary', 'wptheme'),
         ));
 
-
-
-
-
-
-
-
         /*
          * Switch default core markup for search form, comment form, and comments
          * to output valid HTML5.
@@ -118,15 +111,17 @@ add_action('after_setup_theme', 'wptheme_content_width', 0);
  *
  *
  * */
-if ( has_nav_menu( 'primary' )){
-    function be_menu_extras($menu, $args) {
-        if (!function_exists('is_plugin_active'))
-            require_once(ABSPATH . '/wp-admin/includes/plugin.php');
+if (!function_exists('is_plugin_active'))
+    require_once(ABSPATH . '/wp-admin/includes/plugin.php');
 
-        if (class_exists('woocommerce') && is_plugin_active('woocommerce/woocommerce.php')) {
+if (class_exists('woocommerce') && is_plugin_active('woocommerce/woocommerce.php')) {
 
 
-            $extras = '<div class="row mx-md-n5">
+    add_filter('wp_nav_menu_items', 'your_custom_menu_item', 10, 2);
+    function your_custom_menu_item($items, $args)
+    {
+        if ($args->theme_location == 'primary') {
+            $items .= '<div class="row mx-md-n5">
                         <div class="col px-md-5">
                             <div class="p-1 border bg-light">
                             <a  href="' . esc_url(wc_get_page_permalink('cart')) . ' " >
@@ -157,10 +152,10 @@ if ( has_nav_menu( 'primary' )){
                                 </div>
                                 </div>
                         </div>';
-            return $menu . $extras;
-        }
+            }
+        return $items;
     }
 
-    add_filter('wp_nav_menu', 'be_menu_extras', 10, 2);
+
 }
 ?>

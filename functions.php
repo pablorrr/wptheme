@@ -5,7 +5,7 @@
  *
  * @package wptheme
  */
- 
+
 
 /**
  * Theme setup and custom theme supports.
