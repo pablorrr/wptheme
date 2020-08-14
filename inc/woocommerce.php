@@ -37,10 +37,12 @@ if (!function_exists('wptheme_woocommerce_support')) {
         add_theme_support('wc-product-gallery-zoom');
         add_theme_support('wc-product-gallery-slider');
 
-        // hook in and customizer form fields.
-        add_filter('woocommerce_form_field_args', 'wptheme_wc_form_field_args', 10, 3);
+
     }
 }
+
+
+
 
 
 
