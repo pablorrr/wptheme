@@ -8,12 +8,7 @@
 
 function wptheme_scripts()
 {
-
-    //load WP styles
-   // wp_enqueue_style('wptheme-style', get_stylesheet_uri());
-
-
-// ---------------------------------------------
+    // ---------------------------------------------
 // load theme and Bootstrap CSS  conditionally     -
 // ---------------------------------------------
 
@@ -78,7 +73,7 @@ function wptheme_scripts()
 //  thread comments support  -
 // --------------------------------------------------		 
 
-    if (is_singular() && comments_open() && get_option('thread_comments')) {
+    if (is_single() && comments_open() && get_option('thread_comments')) {
         wp_enqueue_script('comment-reply');
     }
 }
@@ -90,10 +85,10 @@ add_action('wp_enqueue_scripts', 'wptheme_scripts');
 // source: https://crunchify.com/how-to-stop-loading-woocommerce-js-javascript-and-css-files-on-all-wordpress-postspages/
 // ---------------------------------------------
 
-/* */
-add_action('wp_enqueue_scripts', 'crunchify_disable_woocommerce_loading_css_js');
 
-function crunchify_disable_woocommerce_loading_css_js()
+add_action('wp_enqueue_scripts', 'wptheme_disable_woocommerce_loading_css_js');
+
+function wptheme_disable_woocommerce_loading_css_js()
 {
 
     // Check if WooCommerce plugin is active

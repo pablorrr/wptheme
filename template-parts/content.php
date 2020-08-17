@@ -13,10 +13,8 @@
     <div class="post-thumbnail">
 
         <?php
-
-
-        if (has_post_thumbnail() && $thumbnails_opt_cs) {
-            the_post_thumbnail(array(600, 600), array('class' => 'img-responsive'));
+        if (has_post_thumbnail() ) {
+            the_post_thumbnail('about-us-size');
         }
         ?>
     </div>

@@ -10,9 +10,6 @@ if (!function_exists('wptheme_setup')) :
 
 
 
-
-
-
     function wptheme_setup()
     {
         /*
@@ -42,8 +39,8 @@ if (!function_exists('wptheme_setup')) :
          * @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
          */
         add_theme_support('post-thumbnails');
-        add_image_size('about-us-size', 250, 250);
-        add_image_size('our-team-size', 250, 250);
+       // add_image_size('about-us-size', 250, 250);
+       // add_image_size('our-team-size', 250, 250);
 
         // This theme uses wp_nav_menu() in one location.
         register_nav_menus(array(
@@ -102,23 +99,23 @@ function wptheme_content_width()
     $GLOBALS['content_width'] = apply_filters('wptheme_content_width', 1170);
 }
 
-add_action('after_setup_theme', 'wptheme_content_width', 0);
+add_action('after_setup_theme', 'wptheme_content_width', 10);
 
 
 /**
  * Dodaj ikonki WC
-
  *
  *
- * */
+ *
+ */
 if (!function_exists('is_plugin_active'))
     require_once(ABSPATH . '/wp-admin/includes/plugin.php');
 
 if (class_exists('woocommerce') && is_plugin_active('woocommerce/woocommerce.php')) {
 
 
-    add_filter('wp_nav_menu_items', 'your_custom_menu_item', 10, 2);
-    function your_custom_menu_item($items, $args)
+    add_filter('wp_nav_menu_items', 'wptheme_custom_menu_item', 10, 2);
+    function wptheme_custom_menu_item($items, $args)
     {
         if ($args->theme_location == 'primary') {
             $items .= '<div class="row mx-md-n5">
