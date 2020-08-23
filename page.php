@@ -11,10 +11,18 @@
  *
  * @package wptheme
  */
-if (is_cart() || is_account_page() || is_checkout() || is_product())
-    get_header('woo');
-else
-    get_header(); ?>
+
+if (!function_exists('is_plugin_active'))
+    require_once(ABSPATH . '/wp-admin/includes/plugin.php');
+
+if (class_exists('woocommerce') && is_plugin_active('woocommerce/woocommerce.php')) {
+    if (is_cart() || is_account_page() || is_checkout() || is_product())
+        get_header('woo');
+    else
+        get_header();
+} elseif (!class_exists('woocommerce') && !is_plugin_active('woocommerce/woocommerce.php')) {
+    get_header();
+} ?>
     <div id="content" class="container">
 
         <div class="row mx-auto m-single">

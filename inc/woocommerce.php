@@ -3,7 +3,6 @@
  * Add WooCommerce support
  * */
 
-
 /**
  *
  * Add custom CSS
@@ -40,9 +39,9 @@ if (!function_exists('wptheme_woocommerce_support')) {
 }
 
 /**
- * Change number of products per row to 3
+ * Change number of products per row to default  3
  * source : https://docs.woocommerce.com/document/change-number-of-products-per-row/
- * Notice that number of products per row cant be greather than products number per page!!!!!! fix that!!!
+ *
  */
 
 add_filter('loop_shop_columns', 'loop_columns', 20, 1);
@@ -57,7 +56,7 @@ if (!function_exists('loop_columns')) {
 
 /**
  * Change number of products per page (pagination)
- * source : https://docs.woocommerce.com/document/storefront-filters-example-change-number-products-displayed-per-page/
+ * source : https://docs.woocommerce.com/document/change-number-of-products-displayed-per-page/
  */
 
 add_filter('loop_shop_per_page', 'products_count_per_page', 30, 1);
@@ -69,117 +68,82 @@ if (!function_exists('products_count_per_page')) {
     }
 }
 /**
+ *
+ * woocommerce docs source online :https://docs.woocommerce.com/document/adding-a-section-to-a-settings-tab/
+ */
+
+add_filter( 'woocommerce_get_sections_products', 'products_display_setup' );
+function products_display_setup( $sections ) {
+
+    $sections['wcproddissetup'] = __( 'Products display setup', 'wptheme' );
+    return $sections;
+
+}
+
+/**
+ * Add settings to the specific section we created before
+ * To retrive option val use:get_option( 'id_name_of_field' )
+ * https://docs.woocommerce.com/document/adding-a-section-to-a-settings-tab/
+ */
+add_filter( 'woocommerce_get_settings_products', 'wcslider_all_settings', 10, 2 );
+function wcslider_all_settings( $settings, $current_section ) {
+    /**
+     * Check the current section is what we want
+     **/
+    if ( $current_section == 'wcproddissetup' ) {
+        $settings_display_products = array();
+
+        // Add text field option - Display products number per row
+        $settings_display_products[] = array(
+            'name'     => __( 'Display products number per row', 'text-domain' ),
+            'desc_tip' => __( 'Type max number of products to display per row ', 'wptheme' ),
+            'id'       => 'prdt_count_per_row',
+            'type'     => 'text',
+            'css'      => 'min-width:300px;',
+            'desc'     => __( 'Max number of products per row', 'wptheme' ),
+        );
+        // Add text field option - Display products number per page
+        $settings_display_products[] = array(
+            'name'     => __( 'Display products number per page', 'wptheme' ),
+            'desc_tip' => __( 'Type number of products to display per page ', 'wptheme' ),
+            'id'       => 'prdt_count_per_page',
+            'type'     => 'text',
+            'css'      => 'min-width:300px;',
+            'desc'     => __( 'Number of products per page', 'wptheme' ),
+        );
+
+
+
+
+        $settings_display_products[] = array( 'type' => 'sectionend', 'id' => 'wcproddissetup' );
+
+        return $settings_display_products;
+
+        /**
+         * If not, return the standard settings
+         **/
+    } else {
+        return $settings;
+    }
+}
+
+
+/**
  * Display category image on category archive
  * source :https://docs.woocommerce.com/document/woocommerce-display-category-image-on-category-archive/
  */
-remove_action('woocommerce_archive_description', 'woocommerce_taxonomy_archive_description', 10);
-remove_action('woocommerce_archive_description', 'woocommerce_product_archive_description', 10);
-add_action('woocommerce_archive_description', 'woocommerce_category_image', 2);
-function woocommerce_category_image()
-{
-    if (is_product_category()) {
+
+add_action( 'woocommerce_archive_description', 'woocommerce_category_image', 2 );
+function woocommerce_category_image() {
+    if ( is_product_category() ){
         global $wp_query;
-        /////////////taken from wc-template-function (woocommerce plugin) line no 818
-        if (is_product_taxonomy() && 0 === absint(get_query_var('paged'))) {
-            $term = get_queried_object();
-
-            if ($term && !empty($term->description)) {
-                echo '<div class="term-description">' . wc_format_content($term->description) . '</div>'; // WPCS: XSS ok.
-            }
-        }
-        /////////
         $cat = $wp_query->get_queried_object();
-        $thumbnail_id = get_woocommerce_term_meta($cat->term_id, 'thumbnail_id', true);
-        $image = wp_get_attachment_url($thumbnail_id);
-        if ($image) {
-            echo '<div class="cat_details">   <img src="' . $image . '" alt="' . $cat->name . '" /></div>';
+        $thumbnail_id = get_term_meta( $cat->term_id, 'thumbnail_id', true );
+        $image = wp_get_attachment_url( $thumbnail_id );
+        if ( $image ) {
+            echo '<img src="' . $image . '" alt="' . $cat->name . '" />';
         }
     }
-}
-
-//remove sidebar from cart page
-
-function _remove_sidebar_cart()
-{
-    if (is_cart() || is_account_page() || is_checkout() || is_product_category()) {//use phhp html bufer obget clean
-        ?>
-        <style>
-            #right-sidebar, #footerfull, #left-sidebar, #statichero, #hero {
-                display: none;
-            }
-
-            #content > div > ul {
-                margin-top: 3em;
-            !important
-            }
-        </style>
-    <?php }
-}
-
-add_action('wp_head', '_remove_sidebar_cart');
-
-/**
- * Set a minimum order amount for checkout
- * taken from :https://docs.woocommerce.com/document/minimum-order-amount/
- *
- */
-add_action('woocommerce_checkout_process', 'wc_minimum_order_amount');
-add_action('woocommerce_before_cart', 'wc_minimum_order_amount');
-
-function wc_minimum_order_amount()
-{
-    // Set this variable to specify a minimum order value
-    $minimum = 50;
-
-    if (WC()->cart->total < $minimum) {
-
-        if (is_cart()) {
-
-            wc_print_notice(
-                sprintf('Your current order total is %s — you must have an order with a minimum of %s to place your order ',
-                    wc_price(WC()->cart->total),
-                    wc_price($minimum)
-                ), 'error'
-            );
-
-        } else {
-
-            wc_add_notice(
-                sprintf('Your current order total is %s — you must have an order with a minimum of %s to place your order',
-                    wc_price(WC()->cart->total),
-                    wc_price($minimum)
-                ), 'error'
-            );
-
-        }
-    }
-}
-
-/**
- * Adjust the quantity input values, set up max and min quantity value which customer can order on single product page
- * taken from https://docs.woocommerce.com/document/adjust-the-quantity-input-values/
- */
-add_filter('woocommerce_quantity_input_args', 'wptheme_woocommerce_quantity_input_args', 10, 2); // Simple products
-
-function wptheme_woocommerce_quantity_input_args($args, $product)
-{
-    if (is_singular('product')) {
-        $args['input_value'] = 4;    // Starting value (we only want to affect product pages, not cart)
-    }
-    $args['max_value'] = 50;    // Maximum value
-    $args['min_value'] = 4;    // Minimum value
-    $args['step'] = 2;    // Quantity steps
-    return $args;
-}
-
-add_filter('woocommerce_available_variation', 'wptheme_woocommerce_available_variation');
-// Variations
-
-function wptheme_woocommerce_available_variation($args)
-{
-    $args['max_qty'] = 50;        // Maximum value (variations)
-    $args['min_qty'] = 4;    // Minimum value (variations)
-    return $args;
 }
 
 

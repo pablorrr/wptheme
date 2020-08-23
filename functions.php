@@ -65,8 +65,10 @@ require get_template_directory() . '/inc/plugin-compatibility/plugin-compatibili
 /**
  * Load WooCommerce custom settings.
  */
-include_once(ABSPATH.'wp-admin/includes/plugin.php');
-if (is_plugin_active( 'woocommerce/woocommerce.php' )) {
+if (!function_exists('is_plugin_active'))
+    require_once(ABSPATH . '/wp-admin/includes/plugin.php');
+
+if (class_exists('woocommerce') && is_plugin_active('woocommerce/woocommerce.php')) {
 require get_template_directory() . '/inc/woocommerce.php';
 }
 
