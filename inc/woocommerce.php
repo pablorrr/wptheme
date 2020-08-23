@@ -1,9 +1,7 @@
 <?php
 /**
  * Add WooCommerce support
- *
- *
- */
+ * */
 
 
 /**
@@ -40,24 +38,6 @@ if (!function_exists('wptheme_woocommerce_support')) {
 
     }
 }
-
-
-
-
-
-
-// ---------------------------------------------
-// remove WooCommerce css style when is unnecessary     -
-// source: https://crunchify.com/how-to-stop-loading-woocommerce-js-javascript-and-css-files-on-all-wordpress-postspages/
-// ---------------------------------------------
-
-/* */
-
-
-
-
-
-
 
 /**
  * Change number of products per row to 3
@@ -115,56 +95,6 @@ function woocommerce_category_image()
             echo '<div class="cat_details">   <img src="' . $image . '" alt="' . $cat->name . '" /></div>';
         }
     }
-}
-
-
-/**/
-if (!function_exists('_custom_tabs_display')) {
-
-    add_filter('woocommerce_product_tabs', '_custom_tabs_display', 10, 1);
-
-    function _custom_tabs_display($tabs)
-    {
-        unset ($tabs['reviews']);//removing opinion tabs
-        $tabs['my_custom_tabs'] = array(
-
-            'title' => 'Custom test title',//add tab title
-            'priority' => 10,
-            'callback' => '_custom_tab_display',//callback to display what is inside tab
-
-        );
-
-        return $tabs;
-    }
-
-    function _custom_tab_display()
-    {
-
-        echo '<iframe width="768" height="480" src="https://www.youtube.com/embed/3aNY0OiNPZQ?list=PL9fcHFJHtFaZh9U9BiKlqX7bGdvFkSjro" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
-
-    }
-}
-
-
-function _custom_function_rel_prod()
-{
-
-    $check_val = get_option('rel_prod', false);
-
-    if (isset($check_val) && $check_val == 'yes') {
-
-        remove_action('woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20);
-    }
-}
-
-//change default image when no thumbanil in single product image
-
-remove_filter('woocommerce_placeholder_img_src', WC()->plugin_url() . '/assets/images/placeholder.png');
-add_filter('woocommerce_placeholder_img_src', '_wc_default_image');
-function _wc_default_image()
-{
-    return get_template_directory_uri() . '/img/no.imagez.png';
-
 }
 
 //remove sidebar from cart page
@@ -242,7 +172,8 @@ function wptheme_woocommerce_quantity_input_args($args, $product)
     return $args;
 }
 
-add_filter('woocommerce_available_variation', 'wptheme_woocommerce_available_variation'); // Variations
+add_filter('woocommerce_available_variation', 'wptheme_woocommerce_available_variation');
+// Variations
 
 function wptheme_woocommerce_available_variation($args)
 {
@@ -254,7 +185,6 @@ function wptheme_woocommerce_available_variation($args)
 
 /*
  * Display on cart page link to shop page at the bottom
- *
  *
  */
 
@@ -276,30 +206,6 @@ function wptheme_add_link_shop()
     }
 
 }
-
-
-/*
- * change breadrumbs nav class
- *
- */
-
-
-/**
- * Change several of the breadcrumb defaults taken from woo docs
- */
-add_filter('woocommerce_breadcrumb_defaults', 'wptheme_woocommerce_breadcrumbs');
-function wptheme_woocommerce_breadcrumbs()
-{
-    return array(
-        'delimiter' => ' &#47; ',
-        'wrap_before' => '<nav style="margin:auto;" class="woocommerce-breadcrumb-custom" itemprop="breadcrumb">',
-        'wrap_after' => '</nav>',
-        'before' => '',
-        'after' => '',
-        'home' => _x('Home', 'breadcrumb', 'woocommerce'),
-    );
-}
-
 
 /*
  * Display shop link in product page with icon

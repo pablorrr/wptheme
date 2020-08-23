@@ -3103,7 +3103,7 @@ var Tooltip = function ($$$1) {
 
 /**
  * --------------------------------------------------------------------------
- * Bootstrap (v4.0.0): popover.js
+ * Bootstrap (v4.0.0): popover-tootlip.js
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * --------------------------------------------------------------------------
  */

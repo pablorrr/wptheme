@@ -42,13 +42,6 @@ require get_template_directory() . '/inc/extras.php';
 require get_parent_theme_file_path ('/inc/customizer.php');
 
 /**
- * Load plugin compatibility file(jetpack, woocomerce).
- */
-require get_template_directory() . '/inc/plugin-compatibility/plugin-compatibility.php';
-
-
-
-/**
  * Load shortccodes.
  */
 require get_template_directory() . '/inc/shortcodes.php';
@@ -59,11 +52,15 @@ require get_template_directory() . '/inc/shortcodes.php';
 if ( ! class_exists( 'wptheme_navwalker' )) {
     require_once(get_template_directory() . '/inc/wptheme-navwalker.php');
 }	
-
 /**
  * Load hooks.
  */
 require get_template_directory() . '/inc/hooks.php';
+
+/**
+ * Load plugin compatibility file(jetpack, woocomerce).
+ */
+require get_template_directory() . '/inc/plugin-compatibility/plugin-compatibility.php';
 
 /**
  * Load WooCommerce custom settings.
@@ -72,7 +69,7 @@ include_once(ABSPATH.'wp-admin/includes/plugin.php');
 if (is_plugin_active( 'woocommerce/woocommerce.php' )) {
 require get_template_directory() . '/inc/woocommerce.php';
 }
-	
+
 /**
  .
  *
@@ -96,7 +93,7 @@ require_once get_template_directory() . '/inc/plugin-compatibility/class-tgm-plu
 /**
  * Register the required plugins for this theme.
  */	
-add_action( 'tgmpa_register', 'la_restaurante_register_required_plugins' );
+add_action( 'tgmpa_register', 'wptheme_register_required_plugins' );
 
 require get_template_directory() . '/inc/tgm-register-plugin.php';
 

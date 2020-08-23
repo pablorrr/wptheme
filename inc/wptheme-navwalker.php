@@ -101,23 +101,7 @@ class wptheme_navwalker extends Walker_Nav_Menu {
 
             }
 
-            /*
-            if ($depth === 0) {
-                $atts['class'] = 'nav-link';
-            }
-            if ($depth === 0 && in_array('menu-item-has-children', $classes)) {
-                $atts['class']       .= ' dropdown-toggle';
-                $atts['data-toggle']  = 'dropdown';
-            }
-            if ($depth > 0) {
-                $atts['class'] = 'dropdown-item';
-            }
-            if (in_array('current-menu-item', $item->classes)) {
-                $atts['class'] .= ' active';
-            }
-            */
-
-			$atts = apply_filters( 'nav_menu_link_attributes', $atts, $item, $args );
+            $atts = apply_filters( 'nav_menu_link_attributes', $atts, $item, $args );
 
 
 
@@ -184,56 +168,5 @@ class wptheme_navwalker extends Walker_Nav_Menu {
         parent::display_element( $element, $children_elements, $max_depth, $depth, $args, $output );
     }
 
-	/**
-	 * Menu Fallback
-	 * =============
-	 * If this function is assigned to the wp_nav_menu's fallback_cb variable
-	 * and a manu has not been assigned to the theme location in the WordPress
-	 * menu manager the function with display nothing to a non-logged in user,
-	 * and will add a link to the WordPress menu manager if logged in as an admin.
-	 *
-	 * @param array $args passed from the wp_nav_menu function.
-	 *
-	 */
-    public static function fallback( $args ) {
-        //if ( current_user_can( 'manage_options' ) ) {
 
-            extract( $args );
-
-            $fb_output = null;
-
-            if ( $container ) {
-                $fb_output = '<' . $container;
-
-                if ( $container_id )
-                    $fb_output .= ' id="' . $container_id . '"';
-
-                if ( $container_class )
-                    $fb_output .= ' class="' . $container_class . '"';
-
-                $fb_output .= '>';
-            }
-
-            $fb_output .= '<ul';
-
-            if ( $menu_id )
-                $fb_output .= ' id="' . $menu_id . '"';
-
-            if ( $menu_class )
-                $fb_output .= ' class="' . $menu_class . '"';
-
-            $fb_output .= '>';
-            $fb_output .= '<li class="nav-item"><a href="#" class="nav-link">Home</a></li>';
-            $fb_output .= '<li class="nav-item"><a href="#" class="nav-link">About Us</a></li>';
-            $fb_output .= '<li class="nav-item"><a href="#" class="nav-link">Gallery</a></li>';
-            $fb_output .= '<li class="nav-item"><a href="#" class="nav-link">Contact Us</a></li>';
-            /*$fb_output .= '<li><a href="' . admin_url( 'nav-menus.php' ) . '">Add a menu</a></li>';*/
-            $fb_output .= '</ul>';
-
-            if ( $container )
-                $fb_output .= '</' . $container . '>';
-
-            echo $fb_output;
-        //}
-    }
 }

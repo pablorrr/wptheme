@@ -51,7 +51,6 @@ get_header('woo'); ?>
             </div><!--col-md-12-->
             <!-- Do the right sidebar check -->
 
-
         </div><!-- .row -->
 
     </div><!-- Container end .wrapper #woocommerce-wrapper -->

@@ -36,7 +36,7 @@ function wptheme_customize_register($wp_customize)
     // Add custom header and sidebar background color setting and control.
     $wp_customize->add_setting(
         'header_background_color', array(
-            'default' => '#fff',
+            'default' => '#66ff33',
             'sanitize_callback' => 'sanitize_hex_color',
             'transport' => 'postMessage',
         )
@@ -45,18 +45,20 @@ function wptheme_customize_register($wp_customize)
     $wp_customize->add_control(
         new WP_Customize_Color_Control(
             $wp_customize, 'header_background_color', array(
-                'label' => __('Header and Menu Navbar Background Color', ''),
-                'description' => __('Applied to the header on small screens.', ''),
+                'label' => __('Header and Menu Navbar Background Color', 'wptheme'),
+                'description' => __('Applied to the header on small screens.', 'wptheme'),
                 'section' => 'header_image',
             )
         )
     );
+
+
     //Other Settings Section
     $wp_customize->add_section(
         'others_setting',
         array(
             'title' => __('Other Customizations', 'wptheme'),
-            //'description' => __( 'This is a section for the header banner Image.', 'wptheme' ),
+            'description' => __( 'This is a section for the header banner Image.', 'wptheme' ),
             'priority' => 40,
         )
     );
@@ -110,7 +112,7 @@ function wptheme_customize_register($wp_customize)
     );
 
 //https://wpbeaches.com/adding-text-block-via-customizer-wordpress/
-
+//opening hours
     // Create custom panel.
     $wp_customize->add_panel('opening_hours', array(
         'priority' => 500,
@@ -329,16 +331,11 @@ function wptheme_customize_register($wp_customize)
     );
 
 
-
-
     // Sanitize text
     function sanitize_text($text)
     {
         return sanitize_text_field($text);
     }
-
-
-
 
 
 }

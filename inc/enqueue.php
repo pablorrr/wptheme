@@ -60,6 +60,8 @@ function wptheme_scripts()
 
         //Bootstrap Jquery
         wp_enqueue_script('wptheme-bootstrapjs', get_template_directory_uri() . '/inc/assets/js/bootstrap.min.js');
+        // popover shortcode effect
+        wp_enqueue_script('popover-tootlip', get_template_directory_uri() . '/inc/assets/js/popover-tootlip.js', array('jquery'), '', true);
 
 
         //affix plugin

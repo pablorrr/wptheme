@@ -20,26 +20,26 @@
                     <a href="#content" class="page-scroller"><i class="fa fa-fw fa-angle-up fa-3x anim"></i></a>
                 </div>
             <?php endif; ?>
-            <?php endif; ?>  echo get_theme_mod('friday_text_block'); ?></li>
+            <?php endif; ?>
+        </div>
+
+        <div class="row">
+            <div style="margin-bottom:1em;" class="col-sm-12 col-md-4">
+                <h2>Opening hours</h2>
+                <ul class="list-group list-unstyled" style="font-size:12pt;">
+                    <li class="list-group-item"><?php _e('Monday  ', 'wptheme');
+                        echo get_theme_mod('monday_text_block'); ?></li>
+                    <li class="list-group-item"><?php _e('Tuesday  ', 'wptheme');
+                        echo get_theme_mod('tuesday_text_block'); ?></li>
+                    <li class="list-group-item"><?php _e('Thursday  ', 'wptheme');
+                        echo get_theme_mod('thursday_text_block'); ?></li>
+                    <li class="list-group-item"><?php _e('Friday  ', 'wptheme');
+                        echo get_theme_mod('friday_text_block'); ?></li>
                     <li class="list-group-item"><?php _e('Saturday  ', 'wptheme');
                         echo get_theme_mod('saturday_text_block'); ?></li>
                     <li class="list-group-item"><?php _e('Sunday  ', 'wptheme');
                         echo get_theme_mod('sunday_text_block'); ?></li>
                 </ul>
-            </div>
-
-            <div class="row">
-                <div style="margin-bottom:1em;" class="col-sm-12 col-md-4">
-                    <h2>Opening hours</h2>
-                    <ul class="list-group list-unstyled" style="font-size:12pt;">
-                        <li class="list-group-item"><?php _e('Monday  ', 'wptheme');
-                            echo get_theme_mod('monday_text_block'); ?></li>
-                        <li class="list-group-item"><?php _e('Tuesday  ', 'wptheme');
-                            echo get_theme_mod('tuesday_text_block'); ?></li>
-                        <li class="list-group-item"><?php _e('Thursday  ', 'wptheme');
-                            echo get_theme_mod('thursday_text_block'); ?></li>
-                        <li class="list-group-item"><?php _e('Friday  ', 'wptheme');
-
             </div>
 
             <div style="margin-bottom:1em;" class="col-sm-12 col-md-4">

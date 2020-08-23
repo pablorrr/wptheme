@@ -35,4 +35,6 @@ get_header(); ?>
             <?php get_sidebar(); ?>
         </div><!--.row .mx-auto .m-single -->
     </div><!--.container-->
+
+
 <?php get_footer(); ?>
