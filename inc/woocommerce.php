@@ -95,7 +95,7 @@ function wcslider_all_settings( $settings, $current_section ) {
 
         // Add text field option - Display products number per row
         $settings_display_products[] = array(
-            'name'     => __( 'Display products number per row', 'text-domain' ),
+            'name'     => __( 'Display products number per row', 'wptheme' ),
             'desc_tip' => __( 'Type max number of products to display per row ', 'wptheme' ),
             'id'       => 'prdt_count_per_row',
             'type'     => 'text',
@@ -145,14 +145,10 @@ function woocommerce_category_image() {
         }
     }
 }
-
-
 /*
  * Display on cart page link to shop page at the bottom
  *
  */
-
-
 add_action('woocommerce_after_cart', 'wptheme_add_link_shop');
 
 function wptheme_add_link_shop()

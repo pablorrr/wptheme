@@ -104,9 +104,6 @@ add_action('after_setup_theme', 'wptheme_content_width', 10);
 
 /**
  * Dodaj ikonki WC
- *
- *
- *
  */
 if (!function_exists('is_plugin_active'))
     require_once(ABSPATH . '/wp-admin/includes/plugin.php');
@@ -152,7 +149,5 @@ if (class_exists('woocommerce') && is_plugin_active('woocommerce/woocommerce.php
             }
         return $items;
     }
-
-
 }
 ?>
