@@ -17,7 +17,7 @@
 	</header><!-- .entry-header -->
 
 	<div class="entry-summary">
-		<?php wptheme_the_excerpt_max_charlength(100); ?>
+		<?php the_excerpt(); ?>
 	</div><!-- .entry-summary -->
 
 	<footer class="entry-footer">

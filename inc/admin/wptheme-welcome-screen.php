@@ -16,10 +16,10 @@ class wptheme_Welcome_Screen
     {
 
         add_action('admin_menu', array($this, 'wptheme_welcome_register_menu'));
-        add_action('load-themes.php', array($this, 'wptheme_activation_admin_notice'));
+        add_action('admin_notices', array($this, 'wptheme_activation_admin_notice'));
         add_action('admin_enqueue_scripts', array($this, 'wptheme_welcome_style'));
         add_action('wptheme_welcome', array($this, 'wptheme_welcome_page'), 10);
-        add_action('admin_notices', array($this, 'wptheme_activation_admin_notice'));
+
 
 
     } // end constructor
