@@ -108,6 +108,6 @@ if ( is_admin() ) {
 }
 
 /**
- * metabox
+ * Metabox
  */
 require get_template_directory() . '/inc/metabox.php';

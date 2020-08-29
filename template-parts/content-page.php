@@ -41,7 +41,9 @@
             );
 
             //get meta value
+            //id="product-
             // echo  get_post_meta(get_the_ID(),'_my_meta_value_key', true );
+            //global $post;
             $hyperLink = get_post_meta($post->ID, '_hyperlink_meta_value_key', true);
             $blankAttr = '_blank';
             $ltrimHyperlink = ltrim($hyperLink, 'http://');

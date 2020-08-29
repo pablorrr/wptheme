@@ -72,10 +72,11 @@ if (!function_exists('products_count_per_page')) {
  * woocommerce docs source online :https://docs.woocommerce.com/document/adding-a-section-to-a-settings-tab/
  */
 
-add_filter( 'woocommerce_get_sections_products', 'products_display_setup' );
-function products_display_setup( $sections ) {
+add_filter('woocommerce_get_sections_products', 'products_display_setup');
+function products_display_setup($sections)
+{
 
-    $sections['wcproddissetup'] = __( 'Products display setup', 'wptheme' );
+    $sections['wcproddissetup'] = __('Products display setup', 'wptheme');
     return $sections;
 
 }
@@ -85,37 +86,36 @@ function products_display_setup( $sections ) {
  * To retrive option val use:get_option( 'id_name_of_field' )
  * https://docs.woocommerce.com/document/adding-a-section-to-a-settings-tab/
  */
-add_filter( 'woocommerce_get_settings_products', 'wcslider_all_settings', 10, 2 );
-function wcslider_all_settings( $settings, $current_section ) {
+add_filter('woocommerce_get_settings_products', 'wcslider_all_settings', 10, 2);
+function wcslider_all_settings($settings, $current_section)
+{
     /**
      * Check the current section is what we want
      **/
-    if ( $current_section == 'wcproddissetup' ) {
+    if ($current_section == 'wcproddissetup') {
         $settings_display_products = array();
 
         // Add text field option - Display products number per row
         $settings_display_products[] = array(
-            'name'     => __( 'Display products number per row', 'wptheme' ),
-            'desc_tip' => __( 'Type max number of products to display per row ', 'wptheme' ),
-            'id'       => 'prdt_count_per_row',
-            'type'     => 'text',
-            'css'      => 'min-width:300px;',
-            'desc'     => __( 'Max number of products per row', 'wptheme' ),
+            'name' => __('Display products number per row', 'wptheme'),
+            'desc_tip' => __('Type max number of products to display per row ', 'wptheme'),
+            'id' => 'prdt_count_per_row',
+            'type' => 'text',
+            'css' => 'min-width:300px;',
+            'desc' => __('Max number of products per row', 'wptheme'),
         );
         // Add text field option - Display products number per page
         $settings_display_products[] = array(
-            'name'     => __( 'Display products number per page', 'wptheme' ),
-            'desc_tip' => __( 'Type number of products to display per page ', 'wptheme' ),
-            'id'       => 'prdt_count_per_page',
-            'type'     => 'text',
-            'css'      => 'min-width:300px;',
-            'desc'     => __( 'Number of products per page', 'wptheme' ),
+            'name' => __('Display products number per page', 'wptheme'),
+            'desc_tip' => __('Type number of products to display per page ', 'wptheme'),
+            'id' => 'prdt_count_per_page',
+            'type' => 'text',
+            'css' => 'min-width:300px;',
+            'desc' => __('Number of products per page', 'wptheme'),
         );
 
 
-
-
-        $settings_display_products[] = array( 'type' => 'sectionend', 'id' => 'wcproddissetup' );
+        $settings_display_products[] = array('type' => 'sectionend', 'id' => 'wcproddissetup');
 
         return $settings_display_products;
 
@@ -133,18 +133,20 @@ function wcslider_all_settings( $settings, $current_section ) {
  * source :https://docs.woocommerce.com/document/woocommerce-display-category-image-on-category-archive/
  */
 
-add_action( 'woocommerce_archive_description', 'woocommerce_category_image', 2 );
-function woocommerce_category_image() {
-    if ( is_product_category() ){
+add_action('woocommerce_archive_description', 'woocommerce_category_image', 2);
+function woocommerce_category_image()
+{
+    if (is_product_category()) {
         global $wp_query;
         $cat = $wp_query->get_queried_object();
-        $thumbnail_id = get_term_meta( $cat->term_id, 'thumbnail_id', true );
-        $image = wp_get_attachment_url( $thumbnail_id );
-        if ( $image ) {
+        $thumbnail_id = get_term_meta($cat->term_id, 'thumbnail_id', true);
+        $image = wp_get_attachment_url($thumbnail_id);
+        if ($image) {
             echo '<img src="' . $image . '" alt="' . $cat->name . '" />';
         }
     }
 }
+
 /*
  * Display on cart page link to shop page at the bottom
  *
@@ -156,12 +158,12 @@ function wptheme_add_link_shop()
 
     if (!is_cart()) {
         echo '<a style="font-size:1.2em;" 
-									href="' . esc_url(wc_get_page_permalink('cart')) . '" >'.__('Go to Cart page','wptheme').'
+									href="' . esc_url(wc_get_page_permalink('cart')) . '" >' . __('Go to Cart page', 'wptheme') . '
 								<i class="fa fa-shopping-cart"></i></a>';
     }
     if (!is_shop()) {
         echo '<a style="font-size:1.2em;"  
-								href="' . esc_url(wc_get_page_permalink('shop')) . '" >'.__('Go to Shop page','wptheme').'
+								href="' . esc_url(wc_get_page_permalink('shop')) . '" >' . __('Go to Shop page', 'wptheme') . '
 								<i class="fa fa-shopping-bag"></i></a>';
     }
 
@@ -171,14 +173,30 @@ function wptheme_add_link_shop()
  * Display shop link in product page with icon
  *
  */
-add_action('woocommerce_after_single_product', 'wp_theme_display_shop_page_link', 5);
+add_action('woocommerce_after_single_product', 'wp_theme_display_shop_page_link', 6);
 
 function wp_theme_display_shop_page_link()
 {
+
     echo '<a style="font-size:1.2em;"  
 								href="' . esc_url(get_permalink(wc_get_page_id('shop'))) . '" >Go to Shop page
 								<i class="fa fa-shopping-bag"></i></a>';
 }
+
+add_action('woocommerce_after_single_product', 'wp_theme_display_meta_link', 5);
+
+function wp_theme_display_meta_link()
+{
+    //get meta value : mozna uzyc :get_the_ID(), nie korzytsac z $post->ID
+    global $product;
+    $hyperLink = get_post_meta($product->get_id(), '_hyperlink_meta_value_key', true);
+    $blankAttr = '_blank';
+    $ltrimHyperlink = ltrim($hyperLink, 'http://');
+    printf('<p><a href="%1$s" target="%2$s">%3$s</a></p>',
+        esc_url($hyperLink), esc_attr($blankAttr), esc_html($ltrimHyperlink));
+
+}
+
 
 /*
  * Print title on single product page at  top

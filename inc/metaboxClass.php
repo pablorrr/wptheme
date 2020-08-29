@@ -22,7 +22,7 @@ class metaboxClass
     public function add_meta_box($post_type)
     {
         // Limit meta box to certain post types.
-        $post_types = array('post', 'page');
+        $post_types = array('post', 'page','product');
 
         if (in_array($post_type, $post_types)) {
             add_meta_box(
@@ -30,8 +30,8 @@ class metaboxClass
                 __('Paste link', 'wptheme'),
                 array($this, 'render_meta_box_content'),
                 $post_type,
-                'advanced',
-                'high'
+                'advanced',//side,normal
+                'low'//high
             );
         }
     }
@@ -107,7 +107,7 @@ class metaboxClass
         // Display the form, using the current value.
         ?>
         <label for="myplugin_new_field">
-            <?php _e('Paste link', 'wptheme'); ?>
+            <?php _e('paste link', 'wptheme'); ?>
         </label>
         <input type="text" id="myplugin_new_field" name="myplugin_new_field" value="<?php echo esc_attr($value); ?>"
                size="25"/>
