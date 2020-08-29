@@ -106,3 +106,8 @@ require get_template_directory() . '/inc/tgm-register-plugin.php';
 if ( is_admin() ) {
 	require get_template_directory() . '/inc/admin/wptheme-welcome-screen.php';
 }
+
+/**
+ * metabox
+ */
+require get_template_directory() . '/inc/metabox.php';

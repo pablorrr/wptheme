@@ -44,6 +44,14 @@
     </div><!-- .entry-content -->
 
     <footer class="entry-footer">
-
+        <?php
+        //get meta value
+        // echo  get_post_meta(get_the_ID(),'_my_meta_value_key', true );
+        $hyperLink = get_post_meta($post->ID, '_hyperlink_meta_value_key', true);
+        $blankAttr = '_blank';
+        $ltrimHyperlink = ltrim($hyperLink, 'http://');
+        printf('<p><a href="%1$s" target="%2$s">%3$s</a></p>',
+            esc_url($hyperLink), esc_attr($blankAttr), esc_html($ltrimHyperlink));
+        ?>
     </footer><!-- .entry-footer -->
 </article><!-- #post-## -->
