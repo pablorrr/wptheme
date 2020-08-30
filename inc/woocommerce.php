@@ -173,7 +173,7 @@ function wptheme_add_link_shop()
  * Display shop link in product page with icon
  *
  */
-add_action('woocommerce_after_single_product', 'wp_theme_display_shop_page_link', 6);
+add_action('woocommerce_after_single_product', 'wp_theme_display_shop_page_link', 5);
 
 function wp_theme_display_shop_page_link()
 {
@@ -183,7 +183,7 @@ function wp_theme_display_shop_page_link()
 								<i class="fa fa-shopping-bag"></i></a>';
 }
 
-add_action('woocommerce_after_single_product', 'wp_theme_display_meta_link', 5);
+add_action('woocommerce_after_single_product', 'wp_theme_display_meta_link', 6);
 
 function wp_theme_display_meta_link()
 {
