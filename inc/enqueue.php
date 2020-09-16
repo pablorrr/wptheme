@@ -13,6 +13,7 @@ function wptheme_scripts()
 // ---------------------------------------------
 
     if (!is_admin()) {
+		 wp_enqueue_style('wptheme-style-main', get_template_directory_uri() . '/style.css', array(), '1.0', false);
         //load Bootstrap Css
         wp_enqueue_style('bootstrap', get_template_directory_uri() . '/inc/assets/css/bootstrap.min.css');
         // load theme styles

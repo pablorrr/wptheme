@@ -14,12 +14,12 @@
     <div class="container-fluid">
         <!-- scroll page angle -->
         <div class="row justify-content-end">
-            <?php if (function_exists('is_woocommerce')):?>
-            <?php if (is_front_page() || is_archive() || (is_single() && !is_woocommerce()) ): ?>
-                <div class="col-md-12 arrow-up">
-                    <a href="#content" class="page-scroller"><i class="fa fa-fw fa-angle-up fa-3x anim"></i></a>
-                </div>
-            <?php endif; ?>
+            <?php if (function_exists('is_woocommerce')): ?>
+                <?php if (is_front_page() || is_archive() || (is_single() && !is_woocommerce())): ?>
+                    <div class="col-md-12 arrow-up">
+                        <a href="#content" class="page-scroller"><i class="fa fa-fw fa-angle-up fa-3x anim"></i></a>
+                    </div>
+                <?php endif; ?>
             <?php endif; ?>
         </div>
 
@@ -48,14 +48,14 @@
 
                     <li>
                         <a class="btn btn-block btn-social btn-twitter"
-                           href="https://twitter.com/explore" target="_blanket">
+                           href="https://twitter.com/explore" target="_blank">
                             <i class="fa fa-twitter"></i><?php _e('Sign in with Twitter', 'wptheme'); ?>
                         </a>
                     </li>
 
                     <li>
                         <a class="btn btn-block btn-social btn-facebook"
-                           href="https://pl-pl.facebook.com/" target="_blanket">
+                           href="https://pl-pl.facebook.com/" target="_blank">
                             <i class="fa fa-facebook"></i>
                             <?php _e('Sign in with Facebook', 'wptheme'); ?>
                         </a>
@@ -64,7 +64,7 @@
 
                     <li>
                         <a class="btn btn-block btn-social btn-google"
-                           href="https://www.youtube.com/" target="_blanket">
+                           href="https://www.youtube.com/" target="_blank">
                             <i class="fa fa-youtube"></i><?php _e('Sign in with Youtube', 'wptheme'); ?>
                         </a>
                     </li>
@@ -166,18 +166,17 @@
 
             <div class="col-sm-12 col-md-4">
                 <h5 style="color:beige;"><?php echo esc_html__('telephone number:   ', 'wptheme');
-                echo get_theme_mod('tel_text_block');?></h5>
+                    echo get_theme_mod('tel_text_block'); ?></h5>
             </div>
 
         </div><!-- .row (login)-->
 
         <div class="row justify-content-end">
             <div class="col-sm-12 col-md-12">
-
                 <h5>
                     <a href="<?php echo home_url('/') ?>"
                        title="<?php echo esc_attr(get_bloginfo('name', 'display')); ?>">
-
+                        <?php echo get_bloginfo('name', 'display'); ?>
                     </a>
                 </h5>
 
