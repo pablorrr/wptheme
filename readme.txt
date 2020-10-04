@@ -32,9 +32,10 @@ This theme takes advantage of these generous tools:
 Font Awesome
 http://fortawesome.github.io/Font-Awesome/license/
 
-WP Bootstrap Starter
-https://afterimagedesigns.com/wp-bootstrap-starter/
-https://afterimagedesigns.com/
+Credits:
+wp bootstrap based on understrap , understrap based on underscores
+wp bootstrap starter - https://pl.wordpress.org/themes/wp-bootstrap-starter/
+understrap - https://understrap.com/
 
 Google Fonts
 https://www.google.com/fonts
